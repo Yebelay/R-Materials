@@ -1,0 +1,531 @@
+---
+author: Yebelay Berehan
+title: |
+       | R Training 
+subtitle: |
+          | \textcolor{orange}{Introduction to R, Rstudio, and coding} 
+institute: |
+        | Email: \textcolor{blue}{yebelay.ma@gmail.com}
+        |
+date: \today
+output: 
+  binb::metropolis:
+    citation_package: natbib
+    highlight: kate
+    includes:
+      in_header: header.tex
+bibliography: demo.bib
+biblio-style: abbrvnat
+beameroption: "show notes"
+#toc: true
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+library(datasets)
+```
+
+## \textcolor{pink}{Introduction to R, Rstudio, and coding}
+
+### \textcolor{orange}{Outlines}
+
+1. What / Why R?
+2. Rstudio & R
+   a. The Source, Console, Help and Environment panes
+   b. Functions and Data Objects
+3. Working with R: Objects and Workspace
+   a. R Objects & Project Management
+   b. Good Coding practice
+4. Data Reading and Writing
+
+## 1. \textcolor{pink}{What is R?}
+
+- Computer language & environment for statistical computing & graphics. Script based (text computer
+code), not GUI based (menu / point & click).
+- Tools for Data Handling and manipulation
+- Large collection of statistical tools (packages) for Data Analysis; contributed by many experts
+- Graphical interface for Visualizing Data & results from statistical analyses
+- Relatively simple and effective, widely used, free, open source.
+
+## \textcolor{pink}{Why R?}
+
+-	Open source (free!): open for anyone to review and contribute.
+-	Maintained by top quality experts
+-	Built for statistical analysis 
+-	Reproducible and transparent: Saved R code can be used to easily reproduce any analysis and Collaborators can share their work in the R script format.
+-	Publication-ready data visualization 
+-	Software compatibility
+-	Generating reports in various formats (MS word, PDF)
+
+
+## Helpful Links
+
+- General R information: \textcolor{blue}{https://www.r-project.org/about.html}
+- R source code contributors: \textcolor{blue}{https://www.r-project.org/contributors.html}
+- About RStudio: \textcolor{blue}{https://www.rstudio.com/about/}
+
+## 2. \textcolor{pink}{RStudio}
+
+### \textcolor{blue}{What is RStudio? Why use it?}
+
+-	Best Integrated Development Environment (IDE) for R
+- Powerful and makes using R easier
+- RStudio can:
+  - \textcolor{cyan}{Organize your code, output, and plots}.
+  - \textcolor{cyan}{Auto-complete code and highlight syntax}.
+  - \textcolor{cyan}{Help view data and objects}.
+  - \textcolor{cyan}{Enable easy integration of R code into documents}.
+-	\textcolor{orange}{User-friendly interfaces}.
+
+## \textcolor{pink}{Basic Setup}
+
+### \textcolor{blue}{Installing R}
+
+- Visit \textcolor{blue}{https://cran.r-project.org/}
+- Or simply google "download R" to find the link to download page.
+- Also, check out "Install R" tutorial video by RStudio, Inc.
+
+### \textcolor{blue}{Installing RStudio}
+
+- Visit \textcolor{blue}{https://www.rstudio.com/products/rstudio/download/}
+- Or simply google "download Rstudio" to find the link to download page.
+-	Also, check out "Install RStudio" tutorial video by RStudio, Inc.
+
+### \textcolor{blue}{Choose the version for your computer and follow installation instructions.} 
+
+## \textcolor{pink}{RStudio Overview}
+
+```{r, out.width='100%', fig.align='center', echo=FALSE}
+knitr::include_graphics("Rstudio1.png")
+```
+
+## \textcolor{pink}{Getting Started}
+
+- RStudio will open with 4 sections (called panes): 
+
+###  Source editor pane
+- Write and edit R scripts
+
+### Console pane
+
+- Interactively run R commands
+
+### Environment/history pane
+
+- Environment: view objects in the global environment
+- History: search and view command history
+
+### Files/Plots/Packages/Help pane
+
+- Files: navigate directories
+- Plots: view generated plots
+- Packages: manage installed packages in the library
+- Help: view help documentations for any package/function
+
+## \textcolor{pink}{Customization} 
+
+### Panes
+
+- The size and position of panes can be customized. 
+- On the top right of each pane, there are buttons to adjust the pane size. 
+- Also, place your mouse pointer/cursor on the border line between panes and when the pointer changes its shape, click and drag to adjust the pane size. 
+- For more options, go to View > Panes on the menu bar. 
+- Alternatively, try Tools > Global Options > Pane Layout.
+
+### Appearances
+
+- The overall appearance can be customized as well. 
+- Go to Tools > Global options > Appearnce on the menu bar to change themes, fonts, and more.
+
+## \textcolor{pink}{	What is R package}
+
+- Packages are collections of R functions, data, and compiled code in a well-defined format. 
+- The directory where packages are stored is called the library. 
+- R comes with a standard set of packages. 
+- Others are available for download and installation. 
+- Once installed, they have to be loaded into the session to be used.
+
+## \textcolor{pink}{Installing and Loading Packages}
+
+### \textcolor{blue}{Installing Packages}
+
+- Option 1: Menu
+```{r, fig.align='center', echo=F, out.width='75%'}
+knitr::include_graphics("option1.png")
+```
+## \textcolor{pink}{Installing and Loading Packages}
+
+- Option 2: Packages Window
+```{r, fig.align='center', echo=F, out.width='40%'}
+knitr::include_graphics("option2.png")
+```
+
+- Option 3: Code
+```{r, eval=FALSE}
+install.packages("readxl") 
+```
+
+### \textcolor{blue}{Loading Packages}
+
+```{r, eval=FALSE}
+.libPaths() # get library location
+library()   # see all packages installed
+search()    # see packages currently loaded
+```
+ 
+## \textcolor{pink}{Updating R and RStudio}
+
+### Updating R:
+
+- Go to CRAN and download new version
+- More efficient: install "installr" package, load it, and run updateR()
+  - Updates R and Optionally updates all packages
+  - May be better to do this in basic Rgui
+- Version should update automatically in RStudio
+  - Check/change R version under Tools>Global Options>R version
+
+### Updating RStudio:
+
+- Go to RStudio and download new version
+- Click on Help>Check for Updates, follow menu prompts
+
+## \textcolor{pink}{Functions and Help}
+
+- Information about a function read.table can be accessed by typing the following into the console:
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+
+ help(read.table) # help about function read.table
+ ?read.table # same thing
+ help.start() # general help
+ example("read.table") # show an example of function read.table
+```
+
+- Arguments are the inputs to a function. 
+- In this case, the only argument to help() is read.table. 
+- Help files provide \textcolor{cyan}{documentation on how to use functions and what functions produce}.
+
+## 3. Working with R: Objects and Workspace
+
+- The \textcolor{red}{workspace is a working environment} where R will store and remember user-defined objects: \textcolor{cyan}{vectors, matrices, data frames, lists, functions, variables} etc. 
+- At the end of an R session, the user can save an image of the current workspace that is automatically reloaded the next time R is started.
+- Except for functions most of \textcolor{cyan}{the user-defined objects are usually referred to as R objects} as a way to designate them. 
+- An R object makes it easy for humans to designate its content which could be a \textcolor{cyan}{single numerical value or a large table of data}.
+
+## \textcolor{pink}{Organize with an RStudio project}
+
+* It is a good habit to immediately \textcolor{blue}{create a project for handling the analysis of new data and keep everything together}. 
+ 
+ Create an R project
+
+- \textcolor{blue}{File > New Project and then choose: New Directory> Name for the directory > Click on Create Project}
+- For more complex project it may be useful to create sub-directories to contain
+data, scripts and other documents separately. 
+
+- Can also type the below function into the Console, but we won't do that in this session.
+
+```{r}
+prodigenr::setup_project("C:/Users/yebel/Desktop/LearningR")
+```
+
+
+## \textcolor{pink}{Creating R objects}
+
+- Objects can be created in the form of
+   - \textcolor{cyan}{variable <- value}  or \textcolor{cyan}{variable = value} or \textcolor{cyan}{variable -> value}. 
+   - Variable names can be \textcolor{cyan}{letters, numbers, and the dot or underline characters} but not dot followed by numbers (\textcolor{red}{.4you is illegal}).
+- the symbol \textcolor{blue}{<-} that could be read as \textcolor{blue}{"assign.." or "place into" or "read in"} etc. 
+
+```{r}
+A <-"Diabetic" # placed in quotes as diabetic is string.
+```
+
+- The standard data objects in R are: **\textcolor{blue}{scalars, vectors, factors, matrices and arrays, lists, and data frames}**.
+- Data types assigned to each objects are: **\textcolor{cyan}{logical, numeric, integer, character, complex}.**
+
+## \textcolor{pink}{Vector}
+
+- A set of scalars arranged in a one-dimensional array.
+- Data values are all the same mode(data type), but can hold any mode.
+   - e.g:(-2, 3.4, 3), (TRUE, FALSE, TRUE), ("blue", "gray", "red")
+- Vectors can be created using the following functions:
+- `c()` function to combine individual values
+   - x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+- `seq()` to create more complex sequences
+   - seq(from=1, to=10, by=2) or seq(1,10 ) 
+- `rep()` to create replicates of values
+   - rep(1:4, times=2, each=2)
+
+## \textcolor{pink}{Some useful functions in vector}
+
+- \textcolor{blue}{class(x):} returns class/type of vector x
+- \textcolor{blue}{length(x)}: returns the total number of elements
+- \textcolor{blue}{x[length(x)]}: returns last value of vector x 
+- \textcolor{blue}{rev(x)}: returns reversed vector
+- \textcolor{blue}{sort(x)}: returns sorted vector
+- \textcolor{blue}{unique(x)}: returns vector without multiple elements
+- \textcolor{blue}{range(x)}: Range of x
+- \textcolor{blue}{quantile(x)}: Quantiles of x for the given probabilities
+- \textcolor{blue}{which.max(x)}:  index of maximum
+- \textcolor{blue}{which.min(x)}:  index of minimum
+
+## \textcolor{pink}{Factors}
+
+- A factor is used to store predefined categorical data
+- Can be ordered and unordered
+   - e.g. :("yes", "no", "no", "yes", "yes"), ("male", "female", "female", "male")
+- Factors can be created using \textcolor{orange}{factor()}:`
+
+```{r}
+size <- factor(c("small", "large", "small", "medium"))
+```
+
+- The levels of a factor can be displayed using \textcolor{orange}{levels()}
+
+## \textcolor{pink}{Matrix}
+
+- Matrix is a rectangular array arranged in rows and columns. 
+- The individual items in a matrix are called its elements or entries. 
+- Matrices can be created by:
+1. matrix()
+2. converting a vector into a matrix
+3. binding together vectors
+- Matrices can be created using the functions:
+   - `matrix()` creates a matrix by specifying rows and columns
+   - `dim()` sets dimensions to a vector
+   - `cbind` combines columns
+   - `rbind` combines rows 
+
+## \textcolor{pink}{Matrix}
+
+ e.g.: 
+```{r}
+m1<-matrix(data = 1:6, nrow = 3, ncol = 2)
+m2<-cbind(1:3,5:7,10:12)
+x=1:6
+dim(x) <- c(2, 3)
+```
+- Note: dim() can also be used to retrieve dimensions of an object! 
+
+**Assign names to rows and columns of a matrix**
+
+```{r}
+rownames(m1) <- c("A", "B", "C") 
+colnames(m1)<- c("a","b")
+```
+
+## \textcolor{pink}{Data frames}
+
+- a data set in R is stored a data frame.
+- Two-dimensional, arranged in rows and columns created using the function: `data.frame()`
+- e.g.
+```{r, eval=FALSE, message=FALSE}
+df <- data.frame(ID = 1:3, Sex = c("F", "F", "M"),
+                 Age = c(17, 18,18))
+str(df) # `str()` displays internal structure of object
+```
+
+- We can enter data directly in to a data frame by using the built-in
+data editor. 
+- We can access the editor by using either the \textcolor{orange}{edit() or fix()}
+
+## \textcolor{pink}{Data frames}
+
+**commands:**
+
+```{r, eval=FALSE}
+ new.data<-data.frame()  # creates an "empty" data frame
+ new.data<-edit(new.data) # request the changes or  `fix(new.data)`
+
+```
+
+
+## \textcolor{pink}{Data frames}
+
+- We'll use the data set called **mydata** to do this exploration. 
+
+```{r, eval=FALSE}
+library(readr)
+mydata <- read_csv("Ethiopia_R_training_edit.csv")
+#View(mydata)
+```
+
+
+```{r, eval=FALSE}
+
+colnames(mydata)
+head(mydata) # to see 6 lines of data 
+tail(mydata, 4) # last four rows
+colSums(is.na(mydata)) # to missing data
+dim(mydata)
+length(mydata)
+str(mydata)
+summary(mydata)
+```
+
+## \textcolor{pink}{Subsetting}
+
+```{r, eval=FALSE}
+mydata[] # the whole data frame 
+mydata[1, 1] # 1st element in 1st column 
+mydata[1, 6] # 1st element in the 6th column 
+mydata[, 1] # first column in the data frame 
+mydata[1] # first column in the data frame 
+mydata[1:3, 3] 
+mydata[3, ] # the 3rd row 
+mydata[1:6, ] # the 1st to 6th rows
+mydata[c(1,4), ] # rows 1 and 4 only 
+mydata[c(1,4), c(1,3) ] 
+mydata[, -1] # the whole except first column
+```
+
+## 4. Reading and Writing data
+
+- Importing data is rather easy in R but that may also depend on the nature of the
+data to be imported and from what format. 
+- Mostly data are in tabular form such as a spreadsheet or a comma-separated file (.csv).
+- Base R has a series of read functions to import tabular data from plain text files with columns delimited by: \textcolor{cyan}{space, tab, comma, with or without a header containing the column names}. 
+- With an added package it is also possible to import directly from a \textcolor{cyan}{Microsoft Excel spreadsheet format or other foreign formats from various sources}.
+
+## \textcolor{pink}{Importing from local files}
+
+- In base R the standard commands to read text files are based on the \textcolor{blue}{read.table()} function. 
+- The following table lists the collection of the base R **read** functions. 
+- For more details use the help command **help(read.table)** that will display help for all.
+
+| Function name| Assumes header|Separator |Decimal | File type |          
+|--------------|---------------|----------|--------|-----------|
+| read.table() |  No           |  " "     |   .    | .text     |
+| read.csv()   |  Yes          |  ","     |   .    | .csv      |
+| read.csv2()  |  Yes          |  ";"     |   ,    | .csv      |
+| read.delim() |  Yes          |  "tab"   |   .    | .text     |
+| read.delim2()|  Yes          |  "tab"   |   ,    | .text     |
+
+Table:  Details of dataset readings
+
+## \textcolor{pink}{Reading raw data from other sources}
+
+### \textcolor{blue}{Import data}
+
+- There are many ways to get data into R and out of R.
+- Import text file data using read.table() and comma separated files using `read.csv()` functions.
+
+```{r, eval=FALSE}
+-# syntax: 
+  read.table("file name with full path", arguments)
+```
+
+```{r, eval=FALSE}
+# Examples:# Creates a data frame named myData
+  mydata<- read.table(file = "datafile.txt",sep=" ",
+                      header=TRUE)
+  mydata<- read.csv(file = "datafile.csv")
+```
+
+## \textcolor{pink}{Reading raw data from other sources}
+
+- File names are specified in the same way as `file.choose()` function can be used to select the
+file interactively.
+i.e.
+```{r, eval=FALSE}
+mydata <-read.csv(file.choose(),sep=",",header=T)
+```
+
+### \textcolor{blue}{Useful arguments}
+
+- Check these arguments carefully when you load your data
+
+```{r, eval=FALSE}
+myData<-read.csv(file="datafile.csv",header= TRUE,
+sep=",", strip.white =TRUE, na.strings= " ")
+```
+
+## \textcolor{pink}{Reading raw data from other sources}
+
+- You can reduce possible errors when loading a data file
+- The \textcolor{cyan}{header = TRUE} argument tells R that the first row of your file contains the variable names
+- The \textcolor{cyan}{sep =  ","} argument tells R that fields are separated by comma
+- The \textcolor{cyan}{strip.white = TRUE} argument removes white space before or after factors that has been mistakenly inserted during data entry. 
+- The \textcolor{cyan}{na.strings = " "} argument replaces empty cells by NA (missing data in R)
+
+## \textcolor{pink}{Read data}
+
+**Stata to R:** Different packages for stata version >=13 vs. <13
+
+```{r, eval=FALSE, message=FALSE}
+library(foreign) # Versions before stata 13
+data <-  read.dta(file="XXX.dta") # Other options
+```
+
+```{r, eval=FALSE, message=FALSE}
+library(readstata13) # Versions from stata 13
+data <-  read.dta13(file="XXX.dta") # Other options
+```
+
+**Excel to R:** There are several packages
+
+```{r, eval=FALSE, message=FALSE}
+library(readxl)
+data <-  read_xlsx(path="XXX.xlsx", sheet = 1,
+col_names = TRUE)
+```
+
+```{r, eval=FALSE, message=FALSE}
+library(readr)
+data <- read_csv("D:/CDC Internship/R Training/Ethiopia_R_training_edit.csv")
+View(data)
+```
+
+## \textcolor{pink}{Read data}
+
+**CSV to R:** There are several packages
+
+```{r, eval=FALSE, message=FALSE}
+library(readr)
+data <- read_csv(file="XXX.csv")
+```
+
+**Text file to R:** Available in R base, used for text and csv files 
+
+```{r, eval=FALSE, message=FALSE}
+data <- read.table(file="XXX.txt",header=TRUE,
+                         sep="")
+```
+
+```{r, eval=FALSE, message=FALSE}
+data <- read.table(file="XXX.csv",header=TRUE,
+                         sep=",")
+```
+
+## \textcolor{pink}{Exporting Data}
+
+**R to Stata:** Use the libraries haven or readstata13
+
+```{r, eval=FALSE, message=FALSE}
+write.dta(data,file="XXX.dta")# Other options
+save.dta13(data, file="XXX.dta") # Other options
+```
+
+```{r, eval=FALSE, echo=FALSE}
+library(haven) # Example to write out text data file 
+write.dta(data, "D:/CDC Internship/R Training/Session 1/data1.dta")
+```
+
+**R to Excel:** Note the package readxl does not work here
+
+```{r, eval=FALSE, message=FALSE}
+library(xlsReadWrite)
+write.xls(data,"data.xls")# Other options
+```
+
+**R to csv:** Use readr package
+
+```{r, eval=FALSE, message=FALSE}
+write_csv(data, "data.csv", na = "")
+```
+
+**R to a text file:**
+
+```{r, eval=FALSE, message=FALSE}
+write.table(data, "data.txt", sep="\t")
+```
